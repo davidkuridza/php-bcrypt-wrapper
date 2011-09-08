@@ -8,8 +8,8 @@ Requirements
 ------------
 
 * PHP 5.3 (or later)
-* OpenSSL - http://www.php.net/manual/en/openssl.requirements.php
-* PHPUnit - https://github.com/sebastianbergmann/phpunit/ - Optional.
+* [OpenSSL](http://www.php.net/manual/en/openssl.requirements.php)
+* [PHPUnit](https://github.com/sebastianbergmann/phpunit/) - Optional.
 
 
 Installation
@@ -42,4 +42,4 @@ Usage
 Contact
 ---------------------------------
 
-Feel free to contact me via david@kuridza.si or http://twitter.com/davidkuridza.
+Feel free to contact me via david@kuridza.si or [twitter](http://twitter.com/davidkuridza).
