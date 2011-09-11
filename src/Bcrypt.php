@@ -44,11 +44,11 @@ class Bcrypt
      *
      * @var integer
      */
-    const DEFAULT_ITERATION = 10;
+    const DEFAULT_ITERATION_COUNT = 10;
 
     /**
      * Hashes a password using PHP's `crypt()` function and a salt. If no salt is provided, it is
-     * generated using `Bcrypt::salt()` with default iteration of `Bcrypt::DEFAULT_ITERATION`.
+     * generated using `Bcrypt::salt()` with default iteration of `Bcrypt::DEFAULT_ITERATION_COUNT`.
      *
      * @param  string  $password  Password to be hashed.
      * @param  string  $salt      Optional. The salt string to be used.
@@ -98,12 +98,12 @@ class Bcrypt
      *                                        Can be between and including `4` and `31`.
      * @return string
      */
-    public static function salt($iteration = self::DEFAULT_ITERATION)
+    public static function salt($iteration = self::DEFAULT_ITERATION_COUNT)
     {
         return sprintf(
             '$2a$%02d$%s',
             // only allow values between and including 4 and 31
-            (int)$iteration < 4 || (int)$iteration > 31 ? self::DEFAULT_ITERATION : (int)$iteration,
+            (int)$iteration < 4 || (int)$iteration > 31 ? self::DEFAULT_ITERATION_COUNT : (int)$iteration,
             // black magic :)
             substr(
                 strtr(
