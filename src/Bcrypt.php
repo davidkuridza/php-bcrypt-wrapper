@@ -40,7 +40,7 @@ class Bcrypt
 {
 
     /**
-     * Default number of iterations for salt generation.
+     * Default number of iterations for salt generation. Can be between and including `4` and `31`.
      *
      * @var integer
      */
@@ -84,7 +84,7 @@ class Bcrypt
         // check each character
         for ( $i=0; $i<$length; $i++ )
         {
-            // character at position $i need to be the sae for $password and $hash
+            // character at position $i need to be the same
             $result |= $password[$i] ^ $hash[$i];
         }
         // so, is it valid?
@@ -98,12 +98,17 @@ class Bcrypt
      *                                        Can be between and including `4` and `31`.
      * @return string
      */
-    public static function salt($iteration = self::DEFAULT_ITERATION_COUNT)
+    public static function salt($iterationCount = self::DEFAULT_ITERATION_COUNT)
     {
+        // make sure $iteration is valid
+        if ( (int)$iterationCount < 4 || (int)$iterationCount > 31 )
+        {
+            throw new InvalidArgumentException('$iterationCount value has to be between 4 and 31.');
+        }
+
         return sprintf(
             '$2a$%02d$%s',
-            // only allow values between and including 4 and 31
-            (int)$iteration < 4 || (int)$iteration > 31 ? self::DEFAULT_ITERATION_COUNT : (int)$iteration,
+            $iterationCount,
             // black magic :)
             substr(
                 strtr(

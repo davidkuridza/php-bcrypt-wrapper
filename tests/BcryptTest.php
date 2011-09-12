@@ -70,13 +70,11 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
     {
         // hashes used for one time only, well, two times :)
         $salt1 = Bcrypt::salt();
-        $salt2 = Bcrypt::salt(3);
-        $salt3 = Bcrypt::salt(4);
-        $salt4 = Bcrypt::salt(5);
-        $salt5 = Bcrypt::salt(10);
-        $salt6 = Bcrypt::salt(11);
-        $salt7 = Bcrypt::salt(31);
-        $salt8 = Bcrypt::salt(32);
+        $salt2 = Bcrypt::salt(4);
+        $salt3 = Bcrypt::salt(5);
+        $salt4 = Bcrypt::salt(10);
+        $salt5 = Bcrypt::salt(11);
+        $salt6 = Bcrypt::salt(31);
 
         // lenght
         $this->assertEquals(29, strlen($salt1));
@@ -85,18 +83,36 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(29, strlen($salt4));
         $this->assertEquals(29, strlen($salt5));
         $this->assertEquals(29, strlen($salt6));
-        $this->assertEquals(29, strlen($salt7));
-        $this->assertEquals(29, strlen($salt8));
+
+        // anonymous helper function
+        $sub = function($salt)
+        {
+            return substr($salt, 0, 7);
+        };
 
         // check iteration
-        $this->assertEquals('$2a$10$', substr($salt1, 0, 7));
-        $this->assertEquals('$2a$10$', substr($salt2, 0, 7));
-        $this->assertEquals('$2a$04$', substr($salt3, 0, 7));
-        $this->assertEquals('$2a$05$', substr($salt4, 0, 7));
-        $this->assertEquals('$2a$10$', substr($salt5, 0, 7));
-        $this->assertEquals('$2a$11$', substr($salt6, 0, 7));
-        $this->assertEquals('$2a$31$', substr($salt7, 0, 7));
-        $this->assertEquals('$2a$10$', substr($salt8, 0, 7));
+        $this->assertEquals(sprintf('$2a$%02d$', Bcrypt::DEFAULT_ITERATION_COUNT), $sub($salt1));
+        $this->assertEquals('$2a$04$', $sub($salt2));
+        $this->assertEquals('$2a$05$', $sub($salt3));
+        $this->assertEquals('$2a$10$', $sub($salt4));
+        $this->assertEquals('$2a$11$', $sub($salt5));
+        $this->assertEquals('$2a$31$', $sub($salt6));
+
+        // test invalid iteration count
+        foreach ( array(0, 3, 32, 1337) as $i )
+        {
+            try
+            {
+                Bcrypt::salt($i);
+                $message = 'InvalidArgumentException should have been thrown for $i = ' . $i;
+                $this->fail($message);
+            }
+            catch ( InvalidArgumentException $e )
+            {
+            }
+            // free it
+            $i = null; unset($i);
+        }
     }
 
 }
