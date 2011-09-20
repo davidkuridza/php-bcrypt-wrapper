@@ -85,7 +85,7 @@ class Bcrypt
         for ( $i=0; $i<$length; $i++ )
         {
             // character at position $i need to be the same
-            $result |= $password[$i] ^ $hash[$i];
+            $result |= $password[$i] !== $hash[$i];
         }
         // so, is it valid?
         return $result === 0;
@@ -97,13 +97,15 @@ class Bcrypt
      * @param  integer  $iteration  Optional. Base-2 logarithm of the iteration, defaults to `10`.
      *                                        Can be between and including `4` and `31`.
      * @return string
+     * @throws \InvalidArgumentException if `$iterationCount` is out of bounds.
      */
     public static function salt($iterationCount = self::DEFAULT_ITERATION_COUNT)
     {
         // make sure $iteration is valid
         if ( (int)$iterationCount < 4 || (int)$iterationCount > 31 )
         {
-            throw new InvalidArgumentException('$iterationCount value has to be between 4 and 31.');
+            $message = '$iterationCount value has to be between 4 and 31.';
+            throw new \InvalidArgumentException($message);
         }
 
         return sprintf(
