@@ -36,7 +36,7 @@ contribute. Following targets are available:
          [echo]   clean           clean up and create artifact directories
          [echo]   tests           run unit tests
 
-`$ ant build` will run `clean` and `tests`.
+Running `$ ant build` will invoke `clean` and `tests`.
 
 
 Usage
@@ -58,4 +58,4 @@ Usage
 Contact
 ---------------------------------
 
-Feel free to contact me via [email](david@kuridza.si) or [twitter](http://twitter.com/davidkuridza).
+Feel free to contact me via david@kuridza.si or [twitter](http://twitter.com/davidkuridza).
