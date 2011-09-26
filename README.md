@@ -15,12 +15,28 @@ Requirements
 Installation
 ------------
 
-Copy `src/Bcrypt.php` to location on the file system where needed.
+Copy `Bcrypt/Bcrypt.php` to location on the file system where needed.
 
-To test whether `Bcrypt` works in your environment, you can simply run a PHPUnit test:
+To test whether `Bcrypt` works in your environment, you can simply run PHPUnit tests from root
+directory:
 
-    $ cd tests
     $ phpunit
+
+An `Ant` build script is provided to simplify setting up the environment in case you would like to
+contribute. Following targets are available:
+
+    $ ant
+    Buildfile: build.xml
+
+    help:
+         [echo] Usage: ant [target [target1 [target2] ...]]
+         [echo] Targets:
+         [echo]   help            print this message
+         [echo]   build           setup env
+         [echo]   clean           clean up and create artifact directories
+         [echo]   tests           run unit tests
+
+`$ ant build` will run `clean` and `tests`.
 
 
 Usage
@@ -42,4 +58,4 @@ Usage
 Contact
 ---------------------------------
 
-Feel free to contact me via david@kuridza.si or [twitter](http://twitter.com/davidkuridza).
+Feel free to contact me via [email](david@kuridza.si) or [twitter](http://twitter.com/davidkuridza).

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<project name="php-bcrypt-wrapper" basedir="./" default="help">
+
+    <!-- help! I need somebody -->
+    <target name="help">
+        <echo message="Usage: ant [target [target1 [target2] ...]]" />
+        <echo message="Targets:" />
+        <echo message="  help            print this message" />
+        <echo message="  build           setup environment" />
+        <echo message="  clean           clean up and create artifact directories" />
+        <echo message="  tests           run unit tests" />
+    </target>
+
+    <!-- clean and prepare environment -->
+    <target name="clean">
+        <delete dir="${basedir}/build/coverage" />
+
+        <mkdir dir="${basedir}/build/coverage" />
+    </target>
+
+    <!-- build environment -->
+    <target name="build" depends="clean,tests" />
+
+    <!-- run unit tests -->
+    <target name="tests">
+        <exec executable="phpunit"
+              failonerror="true"
+        />
+    </target>
+
+</project>

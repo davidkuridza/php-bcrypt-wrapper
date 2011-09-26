@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../src/Bcrypt.php';
+require_once __DIR__ . '/../Bcrypt/Bcrypt.php';
 
 class BcryptTest extends \PHPUnit_Framework_TestCase
 {
