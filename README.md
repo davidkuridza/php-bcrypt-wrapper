@@ -10,6 +10,7 @@ Requirements
 * PHP 5.3 (or later)
 * [OpenSSL](http://www.php.net/manual/en/openssl.requirements.php)
 * [PHPUnit](https://github.com/sebastianbergmann/phpunit/) - Optional.
+* [Ant](http://ant.apache.org/) - Optional.
 
 
 Installation
