@@ -2,18 +2,6 @@
 /**
  * PHP bcrypt wrapper
  *
- * LICENSE
- *
- * This program is free software. It comes without any warranty, to the extent permitted by
- * applicable law. You can redistribute it and/or modify it under the terms of the
- * Do What The Fuck You Want To Public License, Version 2, as published by Sam Hocevar. See
- * http://sam.zoy.org/wtfpl/COPYING for more details.
- *
- * @author  David Kuridza <david@kuridza.si>
- * @license http://sam.zoy.org/wtfpl/COPYING     WTFPL License
- */
-
-/**
  * Bcrypt is a wrapper to simplify the use of bcrypt algorithm in PHP.
  *
  * Functionality is stronlgy based on article published by Thomas Ptacek on
@@ -33,8 +21,9 @@
  *   $salt   = Bcrypt::salt(24); // 2^24 iterations
  *   $hashed = Bcrypt::hash($password, $salt);
  *
- * @author  David Kuridza <david@kuridza.si>
- * @license http://sam.zoy.org/wtfpl/COPYING     WTFPL License
+ * @author   David Kuridža <david@kuridza.si>
+ * @license  http://www.opensource.org/licenses/mit-license.php MIT
+ * @link     http://github.com/davidkuridza/php-bcrypt-wrapper
  */
 class Bcrypt
 {
