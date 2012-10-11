@@ -1,6 +1,8 @@
 PHP bcrypt wrapper
 =======
 
+[![Build Status](https://secure.travis-ci.org/davidkuridza/php-bcrypt-wrapper.png)](http://travis-ci.org/davidkuridza/php-bcrypt-wrapper)
+
 PHP bcrypt is a wrapper to simplify the use of bcrypt algorithm in PHP.
 
 
