@@ -49,6 +49,20 @@ class Bcrypt
     }
 
     /**
+     * An alias for `Bcrypt::verify()`. Will be removed in v1.1.
+     *
+     * @param  string  $password  Password to check.
+     * @param  string  $hash      Hashed password to compare `$password` to.
+     * @return boolean
+     * @see    Bcrypt::verify()
+     * @deprecated since version 1.0.1
+     */
+    public static function check($password, $hash)
+    {
+        return self::verify($password, $hash);
+    }
+
+    /**
      * Checks `$password` and its stored `$hash` value using PHP's `crypt()` function and
      * constant-time algorithm to defend againt timing attacks, see
      * http://codahale.com/a-lesson-in-timing-attacks/ for more details.
@@ -57,7 +71,7 @@ class Bcrypt
      * @param  string  $hash      Hashed password to compare `$password` to.
      * @return boolean
      */
-    public static function check($password, $hash)
+    public static function verify($password, $hash)
     {
         // hash it
         $password = crypt($password, $hash);
