@@ -97,8 +97,10 @@ class Bcrypt
             throw new \InvalidArgumentException($message);
         }
 
+        // see https://bugs.php.net/bug.php?id=55477 for more information on prefix based on PHP version
         return sprintf(
-            '$2a$%02d$%s',
+            '%s%02d$%s',
+            0 <= version_compare(PHP_VERSION, '5.3.7') ? '$2y$' : '$2a$',
             $iterationCount,
             // black magic :)
             substr(

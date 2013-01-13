@@ -20,17 +20,17 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(60, strlen($hash2));
 
         // Blowfish?
-        $this->assertEquals('$2a$',    substr($hash1, 0, 4));
-        $this->assertEquals('$2a$',    substr($hash2, 0, 4));
-        $this->assertEquals('$2a$10$', substr($hash1, 0, 7));
-        $this->assertEquals('$2a$10$', substr($hash2, 0, 7));
+        $this->assertEquals($this->_prefix(),         substr($hash1, 0, 4));
+        $this->assertEquals($this->_prefix(),         substr($hash2, 0, 4));
+        $this->assertEquals($this->_prefix() . '10$', substr($hash1, 0, 7));
+        $this->assertEquals($this->_prefix() . '10$', substr($hash2, 0, 7));
 
         // different salt
         $salt1 = Bcrypt::salt(5);
         $salt2 = Bcrypt::salt(11);
 
-        $this->assertEquals('$2a$05$', substr(Bcrypt::hash('test123', $salt1), 0, 7));
-        $this->assertEquals('$2a$11$', substr(Bcrypt::hash('test123', $salt2), 0, 7));
+        $this->assertEquals($this->_prefix() . '05$', substr(Bcrypt::hash('test123', $salt1), 0, 7));
+        $this->assertEquals($this->_prefix() . '11$', substr(Bcrypt::hash('test123', $salt2), 0, 7));
     }
 
     /**
@@ -91,12 +91,12 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
         };
 
         // check iteration
-        $this->assertEquals(sprintf('$2a$%02d$', Bcrypt::DEFAULT_ITERATION_COUNT), $sub($salt1));
-        $this->assertEquals('$2a$04$', $sub($salt2));
-        $this->assertEquals('$2a$05$', $sub($salt3));
-        $this->assertEquals('$2a$10$', $sub($salt4));
-        $this->assertEquals('$2a$11$', $sub($salt5));
-        $this->assertEquals('$2a$31$', $sub($salt6));
+        $this->assertEquals(sprintf($this->_prefix() . '%02d$', Bcrypt::DEFAULT_ITERATION_COUNT), $sub($salt1));
+        $this->assertEquals($this->_prefix() . '04$', $sub($salt2));
+        $this->assertEquals($this->_prefix() . '05$', $sub($salt3));
+        $this->assertEquals($this->_prefix() . '10$', $sub($salt4));
+        $this->assertEquals($this->_prefix() . '11$', $sub($salt5));
+        $this->assertEquals($this->_prefix() . '31$', $sub($salt6));
 
         // test invalid iteration count
         foreach ( array(0, 3, 32, 1337) as $i )
@@ -113,6 +113,20 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
             // free it
             $i = null; unset($i);
         }
+    }
+
+    /**
+     * Returns prefix based on PHP version.
+     *
+     * @return string
+     */
+    private function _prefix()
+    {
+        if ( 0 <= version_compare(PHP_VERSION, '5.3.7') )
+        {
+            return '$2y$';
+        }
+        return '$2a$';
     }
 
 }
