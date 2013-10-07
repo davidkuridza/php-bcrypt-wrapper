@@ -1,3 +1,9 @@
+DEPRECATED
+==========
+
+### Please use [PHP's password hashing functions](http://php.net/password) or [password_compat](https://github.com/ircmaxell/password_compat).
+
+
 PHP bcrypt wrapper
 =======
 
